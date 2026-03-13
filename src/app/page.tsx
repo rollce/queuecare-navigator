@@ -1,65 +1,45 @@
-import Image from "next/image";
+import { AccessTime, LocalHospital, PsychologyAlt, TrendingDown } from "@mui/icons-material";
+import { Box, Button, Card, CardContent, Chip, Container, Grid, Stack, Typography } from "@mui/material";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <Container maxWidth="lg" sx={{ py: 5 }}>
+      <Box sx={{ p: { xs: 3, md: 5 }, border: "1px solid rgba(19,23,37,0.12)", bgcolor: "background.paper", borderRadius: 4, boxShadow: "0 8px 30px rgba(20,35,60,0.08)" }}>
+        <Chip label="REAL PROBLEM: CLINIC WAITING TIME" color="primary" sx={{ mb: 2 }} />
+        <Typography variant="h1" sx={{ fontSize: { xs: "2rem", md: "3.6rem" }, lineHeight: 1.1 }}>
+          Find faster care paths before spending hours in line
+        </Typography>
+        <Typography sx={{ mt: 2, maxWidth: 780, color: "text.secondary", fontSize: { xs: 14, md: 18 }, lineHeight: 1.8 }}>
+          QueueCare combines symptom triage and real-time wait prioritization to route people toward
+          more suitable clinics and reduce unnecessary queue overload.
+        </Typography>
+        <Stack direction={{ xs: "column", sm: "row" }} spacing={1.5} sx={{ mt: 3 }}>
+          <Button href="/triage" variant="contained">Start Triage</Button>
+          <Button href="/clinics" variant="outlined">View Clinics</Button>
+          <Button href="/faq" variant="outlined">Read FAQ</Button>
+        </Stack>
+      </Box>
+
+      <Grid container spacing={2} sx={{ mt: 1 }}>
+        {[
+          { icon: <AccessTime />, title: "Avg waiting reduction", value: "34%" },
+          { icon: <LocalHospital />, title: "Connected clinics", value: "12" },
+          { icon: <PsychologyAlt />, title: "Triage categories", value: "3" },
+          { icon: <TrendingDown />, title: "Queue drop in peak hours", value: "22%" },
+        ].map((item) => (
+          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={item.title}>
+            <Card>
+              <CardContent>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  {item.icon}
+                  <Typography variant="body2" color="text.secondary">{item.title}</Typography>
+                </Stack>
+                <Typography variant="h4" sx={{ mt: 1, fontWeight: 700 }}>{item.value}</Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 }
